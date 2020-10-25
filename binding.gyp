@@ -2,7 +2,7 @@
     'targets': [
         {
             'target_name': 'napi_zstd',
-            'sources': ['src/napi-zstd.cc', 'src/zstd-wrapper.cc'],
+            'sources': ['src/napi-zstd.cpp', 'src/zstd-wrapper.cpp'],
             'include_dirs': [
                 '<!@(node -p \'require("node-addon-api").include\')',
                 '<(module_root_dir)/external/zstd/lib',
