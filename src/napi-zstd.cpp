@@ -81,70 +81,75 @@ JsZstd::JsZstd(const Napi::CallbackInfo& info)
 Napi::Value JsZstd::compress(const Napi::CallbackInfo &info) {
     auto env = info.Env();
 
-    // 引数チェック: 対象のデータが指定されていない場合は続行不可
-    if (info.Length() < 1) {
-        Napi::TypeError::New(env, "Wrong number of arguments, expected 1")
-            .ThrowAsJavaScriptException();
-        return env.Null();
-    }
 
-    // 第1引数: 対象のデータを取得
-    auto original = to_vector(info[0]);
-    if (env.IsExceptionPending()) {
-        return env.Null();
-    }
+    //// 引数チェック: 対象のデータが指定されていない場合は続行不可
+    //if (info.Length() < 1) {
+    //    Napi::TypeError::New(env, "Wrong number of arguments, expected 1")
+    //        .ThrowAsJavaScriptException();
+    //    return env.Null();
+    //}
+//
+    //// 第1引数: 対象のデータを取得
+    //auto original = to_vector(info[0]);
+    //if (env.IsExceptionPending()) {
+    //    return env.Null();
+    //}
+//
+    //// 第2引数: 圧縮レベルが指定されている場合は取得する。省略時はデフォルトの圧縮レベルにする
+    //int level = Zstd::defaultCompressionLevel();
+    //if (info.Length() >= 2) {
+    //    if (!info[1].IsNumber()) {
+    //        Napi::TypeError::New(env, "Wrong second argument, must be a number")
+    //            .ThrowAsJavaScriptException();
+    //        return env.Null();
+    //    }
+//
+    //    level = info[1].As<Napi::Number>().Int32Value();
+    //}
+//
+    //// 圧縮する
+    //std::vector<uint8_t> compressed;
+    //if (!zstd_.compress(compressed, original, level)) {
+    //    Napi::TypeError::New(env, "Compression error")
+    //        .ThrowAsJavaScriptException();
+    //    return env.Null();
+    //}
+//
+    //// 圧縮した結果をBufferに変換して返す
+    //return to_buffer(env, compressed).As<Napi::Value>();
 
-    // 第2引数: 圧縮レベルが指定されている場合は取得する。省略時はデフォルトの圧縮レベルにする
-    int level = Zstd::defaultCompressionLevel();
-    if (info.Length() >= 2) {
-        if (!info[1].IsNumber()) {
-            Napi::TypeError::New(env, "Wrong second argument, must be a number")
-                .ThrowAsJavaScriptException();
-            return env.Null();
-        }
-
-        level = info[1].As<Napi::Number>().Int32Value();
-    }
-
-    // 圧縮する
-    std::vector<uint8_t> compressed;
-    if (!zstd_.compress(compressed, original, level)) {
-        Napi::TypeError::New(env, "Compression error")
-            .ThrowAsJavaScriptException();
-        return env.Null();
-    }
-
-    // 圧縮した結果をBufferに変換して返す
-    return to_buffer(env, compressed).As<Napi::Value>();
+	return env.Null();
 }
 
 // 伸長関数: 対象のデータを受け取り、伸長結果を返す
 Napi::Value JsZstd::decompress(const Napi::CallbackInfo &info) {
     auto env = info.Env();
 
-    // 引数チェック: 対象のデータが指定されていない場合は続行不可
-    if (info.Length() < 1) {
-        Napi::TypeError::New(env, "Wrong number of arguments, expected 1")
-            .ThrowAsJavaScriptException();
-        return env.Null();
-    }
+    //// 引数チェック: 対象のデータが指定されていない場合は続行不可
+    //if (info.Length() < 1) {
+    //    Napi::TypeError::New(env, "Wrong number of arguments, expected 1")
+    //        .ThrowAsJavaScriptException();
+    //    return env.Null();
+    //}
 
-    // 第1引数: 対象のデータを取得
-    auto compressed = to_vector(info[0]);
-    if (env.IsExceptionPending()) {
-        return env.Null();
-    }
+    //// 第1引数: 対象のデータを取得
+    //auto compressed = to_vector(info[0]);
+    //if (env.IsExceptionPending()) {
+    //    return env.Null();
+    //}
 
-    // 伸長する
-    std::vector<uint8_t> original;
-    if (!zstd_.decompress(original, compressed)) {
-        Napi::TypeError::New(env, "Decompression error")
-            .ThrowAsJavaScriptException();
-        return env.Null();
-    }
+    //// 伸長する
+    //std::vector<uint8_t> original;
+    //if (!zstd_.decompress(original, compressed)) {
+    //    Napi::TypeError::New(env, "Decompression error")
+    //        .ThrowAsJavaScriptException();
+    //    return env.Null();
+    //}
 
-    // 伸長した結果をBufferに変換して返す
-    return to_buffer(env, original).As<Napi::Value>();
+    //// 伸長した結果をBufferに変換して返す
+    //return to_buffer(env, original).As<Napi::Value>();
+
+	return env.Null();
 }
 
 // モジュールの初期化処理

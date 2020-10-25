@@ -4,13 +4,14 @@
             'target_name': 'napi_zstd',
             'sources': ['src/napi-zstd.cpp', 'src/zstd-wrapper.cpp'],
             'include_dirs': [
-                '<!@(node -p \'require("node-addon-api").include\')',
+                '<!@(node -p \'require(\"node-addon-api\").include\')',
+                '<(module_root_dir)/node_modules/node-addon-api',
                 '<(module_root_dir)/external/zstd/lib',
             ],
             'cflags!': ['-fno-exceptions'],
             'cflags_cc!': ['-fno-exceptions', '-std=c++14'],
             'defines': ['NAPI_DISABLE_CPP_EXCEPTIONS'],
-            'libraries': ['<(module_root_dir)/external/zstd/lib/libzstd.a'],
+            'libraries': [],
             'conditions': [
                 [
                     'OS=="mac"',
